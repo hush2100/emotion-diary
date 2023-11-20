@@ -8,8 +8,7 @@ import Diary from './pages/Diary';
 import New from './pages/New';
 
 
-// import MyButton from './components/MyButton';
-// import MyHeader from './components/MyHeader';
+
 const reducer = (state, action) => {
   let newState = [];
   switch(action.type) {
@@ -39,8 +38,35 @@ const reducer = (state, action) => {
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
+const dummyData = [
+  {
+    id:1, 
+    emotion: 1,
+    content:'첫번째 일기',
+    date : 1700440823309,
+  },
+  {
+    id:2, 
+    emotion: 2,
+    content:'두번째 일기',
+    date : 1700440823310,
+  },
+  {
+    id:3, 
+    emotion: 3,
+    content:'세번째 일기',
+    date : 1700440823312,
+  },
+  {
+    id:4, 
+    emotion: 4,
+    content:'네번째 일기',
+    date : 1700440823314,
+  },
+]
+
 function App() {
-  const [data, dispatch] = useReducer(reducer, []);
+  const [data, dispatch] = useReducer(reducer, dummyData);
   const dataId = useRef(0);
   //CREATE
   const onCreate = (date, content, emotion) => {
@@ -70,11 +96,10 @@ function App() {
     <DiaryDispatchContext.Provider value={{onCreate, onRemove, onEdit}}>
      <BrowserRouter>
       <div className="App">
-        <h2>App</h2>
-      
+          
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/edit" element={<Edit />} />
+          <Route path="/edit/:id" element={<Edit />} />
           <Route path="/new" element={<New />} />
           <Route path="/diary/:id" element={<Diary />} />
         </Routes>
