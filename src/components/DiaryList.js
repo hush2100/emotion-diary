@@ -12,11 +12,11 @@ const filterOptionList = [
   {value:'good', sortname: '좋은 감정'},
   {value:'bad', sortname: '나쁜 감정'},
 ]
-const ControlMenu = ({value, onChange, optionList}) => {
+const ControlMenu = React.memo(({value, onChange, optionList}) => {
   return <select className="ControlMenu" value={value} onChange={(e) => onChange(e.target.value)}>
     {optionList.map((it, idx) => <option key={idx} value={it.value}>{it.sortname}</option>)}
   </select>
-}
+})
 const DiaryList = ({diaryList}) => {
   const navigate = useNavigate();
   const [sortType, setSortType] = useState('latest');
